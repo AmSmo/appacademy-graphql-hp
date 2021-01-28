@@ -2,7 +2,43 @@ Practice your query syntax using GraphiQL to get a feel for how schemas are set 
 
 1. Write a query that will return the name, founder, ghost, and animal of Gryffindor (id: 1) and Ravenclaw (id: 4). Remember to alias - then DRY up your query with a fragment!
 
+{
+gryf: house(id: 1) {
+...houseInfo
+}
+raven: house(id: 4) {
+...houseInfo
+}
+}
+
+fragment houseInfo on House {
+name
+founder
+ghost
+animal
+}
+
 2. Write a query that will return the core, length, owner name, and the name of the owner's house for both the wand with the `id` of 7 and the wand with the `id` of 10. Then use a fragment to DRY it up!
+
+{
+Harry: wand(id: 7) {
+...wander
+}
+Ron: wand(id: 10) {
+...wander
+}
+}
+
+fragment wander on Wand {
+core
+length
+wizard {
+name
+house {
+name
+}
+}
+}
 
 3. Create a query that will accept an `id` variable and will return the patronus form associated with that `id`.
 
